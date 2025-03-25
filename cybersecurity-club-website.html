@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Security Club</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Orbitron:400,700&display=swap">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+    <style>
+        :root {
+            --primary-color: #0a2463;
+            --secondary-color: #1e56a0;
+            --tertiary-color: #4d96ff;
+            --light-color: #d6e4ff;
+            --dark-color: #061440;
+            --text-color: #333;
+            --text-light: #fff;
+            --matrix-color: #00ffff;
+            --accent-color: #ff5e62;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        body {
+            background-color: #050a1a;
+            color: var(--text-light);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%234d96ff" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>') 12 12, auto;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(6, 20, 64, 0.97), rgba(6, 20, 64, 0.97)), 
+                        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231e56a0' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"),
+                        linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+            z-index: -1;
+        }
+        
+        /* Matrix rain animation */
+        @keyframes matrixRain {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(1000%);
+                opacity: 0;
+            }
+        }
+        
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .matrix-drop {
+            position: absolute;
+            color: var(--matrix-color);
+            font-family: monospace;
+            font-size: 14px;
+            text-shadow: 0 0 5px var(--matrix-color);
+            animation: matrixRain 8s linear infinite;
+            opacity: 0;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            background-color: var(--tertiary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 0 15px var(--tertiary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                top: -50%;
+                left: -50%;
+            }
+            100% {
+                top: 150%;
+                left: 150%;
+            }
+        }
+        
+        nav {
+            background-color: rgba(30, 86, 160, 0.8);
+            padding: 0.5rem 1rem;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--tertiary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        nav a::before {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--matrix-color);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+        
+        nav a:hover {
+            background-color: rgba(77, 150, 255, 0.2);
+            color: var(--matrix-color);
+            text-shadow: 0 0 5px var(--matrix-color);
+        }
+        
+        nav a:hover::before {
+            width: 80%;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(10, 36, 99, 0.8), rgba(10, 36, 99, 0.6)), url("/api/placeholder/1200/400") no-repeat center center;
+            background-size: cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--tertiary-color);
+            margin: 0.5rem auto;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--tertiary-color);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .event-card {
+            background: linear-gradient(to bottom, rgba(10, 36, 99, 0.7), rgba(30, 86, 160, 0.7));
+            color: var(--text-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(77, 150, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 15px var(--tertiary-color);
+            border-color: var(--tertiary-color);
+        }
+        
+        .event-image {
+            height: 200px;
+            background-color: var(--tertiary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .event-details {
+            padding: 1.5rem;
+        }
+        
+        .event-date {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .event-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .team-member {
+            width: 250px;
+            background-color: rgba(30, 86, 160, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            border: 1px solid rgba(77, 150, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 15px var(--tertiary-color);
+            border-color: var(--tertiary-color);
+        }
+        
+        .member-image {
+            height: 250px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .member-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(214, 228, 255, 0.1);
+            border-radius: 50%;
+            color: var(--tertiary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(77, 150, 255, 0.3);
+        }
+        
+        .social-link:hover {
+            background-color: var(--tertiary-color);
+            color: white;
+            box-shadow: 0 0 10px var(--tertiary-color);
+        }
+        
+        .cta {
+            background-color: rgba(30, 86, 160, 0.7);
+            color: var(--text-light);
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--tertiary-color);
+            border-bottom: 1px solid var(--tertiary-color);
+        }
+        
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(77, 150, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(77, 150, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+        }
+        
+        input, textarea {
+            padding: 0.8rem;
+            border: 1px solid rgba(77, 150, 255, 0.3);
+            border-radius: 5px;
+            background-color: rgba(6, 20, 64, 0.7);
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--tertiary-color);
+            box-shadow: 0 0 10px var(--tertiary-color);
+        }
+        
+        button {
+            background-color: var(--tertiary-color);
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--tertiary-color);
+        }
+        
+        button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+        
+        button:hover {
+            background-color: transparent;
+            box-shadow: 0 0 15px var(--tertiary-color);
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            nav a {
+                padding: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Blog section styles */
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-card {
+            background-color: rgba(30, 86, 160, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            border: 1px solid rgba(77, 150, 255, 0.2);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 15px var(--tertiary-color);
+            border-color: var(--tertiary-color);
+        }
+        
+        .blog-image {
+            height: 200px;
+            background-color: var(--tertiary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: var(--tertiary-color);
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        .visualization-container {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(77, 150, 255, 0.3);
+            border: 1px solid var(--tertiary-color);
+            position: relative;
+        }
+        
+        .tor-iframe {
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        .visualization-info {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: rgba(30, 86, 160, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(77, 150, 255, 0.2);
+        }
+        
+        .section-description {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--light-color);
+        }
+        
+        /* Particle background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+        
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(77, 150, 255, 0.5);
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--tertiary-color);
+        }
+        
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #000000; /* Black background */
+            color: #ff0000; /* Red text */
+        }
+        
+        body.light-mode::before {
+            background: linear-gradient(rgba(0, 0, 0, 0.97), rgba(0, 0, 0, 0.97)),
+                        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff0000' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"); /* Red grid */
+        }
+        
+        body.light-mode .section-title {
+            color: #ff0000; /* Red section titles */
+        }
+        
+        body.light-mode .section-title::after {
+            background-color: #ff0000; /* Red underline */
+        }
+        
+        body.light-mode .feature-card {
+            background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+            border: 1px solid rgba(255, 0, 0, 0.2); /* Red border */
+        }
+        
+        body.light-mode .feature-card:hover {
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); /* Red glow */
+        }
+        
+        body.light-mode .feature-icon {
+            color: #ff0000; /* Red icons */
+        }
+        
+        body.light-mode .feature-card h3 {
+            color: #ff0000; /* Red headings */
+        }
+        
+        body.light-mode nav {
+            background-color: rgba(255, 0, 0, 0.8); /* Red navigation */
+            border-bottom: 1px solid rgba(255, 0, 0, 0.5); /* Red border */
+        }
+        
+        body.light-mode nav a {
+            color: #000000; /* Black text */
+        }
+        
+        body.light-mode nav a:hover {
+            background-color: rgba(255, 0, 0, 0.2); /* Lighter red on hover */
+            color: #ff0000; /* Red text on hover */
+        }
+        
+        body.light-mode .theme-toggle {
+            background-color: #ff0000; /* Red toggle button */
+            color: #000000; /* Black icon */
+        }
+        
+        body.light-mode .countdown-item {
+            background-color: rgba(255, 0, 0, 0.3); /* Light red background */
+            border: 1px solid rgba(255, 0, 0, 0.3); /* Red border */
+        }
+        
+        body.light-mode .countdown-number {
+            color: #ff0000; /* Red numbers */
+            text-shadow: 0 0 10px #ff0000; /* Red glow */
+        }
+        
+        body.light-mode .skill-item {
+            background-color: rgba(255, 0, 0, 0.2); /* Light red background */
+            border: 1px solid rgba(255, 0, 0, 0.2); /* Red border */
+        }
+        
+        body.light-mode .skill-progress {
+            background-color: #ff0000; /* Red progress bar */
+        }
+        
+        body.light-mode .skill-name {
+            color: #ff0000; /* Red skill names */
+        }
+        
+        body.light-mode .challenge-container {
+            background-color: rgba(255, 0, 0, 0.7); /* Red background */
+            border: 1px solid #ff0000; /* Red border */
+        }
+        
+        body.light-mode .challenge-container:hover {
+            box-shadow: 0 0 15px #ff0000; /* Red glow */
+        }
+        
+        body.light-mode .challenge-title {
+            color: #ff0000; /* Red title */
+        }
+        
+        body.light-mode .challenge-input input {
+            background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+            border: 1px solid #ff0000; /* Red border */
+            color: #000000; /* Black text */
+        }
+        
+        body.light-mode .challenge-input button {
+            background-color: #ff0000; /* Red button */
+            color: #000000; /* Black text */
+        }
+        
+        body.light-mode .challenge-input button:hover {
+            background-color: transparent; /* Transparent on hover */
+            box-shadow: 0 0 10px #ff0000; /* Red glow */
+            border: 1px solid #ff0000; /* Red border */
+        }
+        
+        /* Countdown timer */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(30, 86, 160, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 80px;
+            border: 1px solid rgba(77, 150, 255, 0.3);
+            box-shadow: 0 0 15px rgba(77, 150, 255, 0.1);
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--tertiary-color);
+            text-shadow: 0 0 10px var(--tertiary-color);
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Skills section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .skill-item {
+            background-color: rgba(30, 86, 160, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(77, 150, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--tertiary-color);
+            box-shadow: 0 0 15px var(--tertiary-color);
+        }
+        
+        .skill-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--tertiary-color);
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background-color: var(--tertiary-color);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .skill-percentage {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Mini CTF/Challenge Section */
+        .challenge-container {
+            background-color: rgba(10, 36, 99, 0.7);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--tertiary-color);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .challenge-container:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--tertiary-color);
+        }
+        
+        .challenge-title {
+            font-size: 1.5rem;
+            color: var(--tertiary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .challenge-description {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .challenge-input {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .challenge-input input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--tertiary-color);
+            border-radius: 5px;
+            padding: 0.8rem;
+            width: 300px;
+            color: var(--text-light);
+            margin-right: 0.5rem;
+        }
+        
+        .challenge-input button {
+            background-color: var(--tertiary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .challenge-input button:hover {
+            background-color: transparent;
+            box-shadow: 0 0 10px var(--tertiary-color);
+            border: 1px solid var(--tertiary-color);
+        }
+        
+        .challenge-hint {
+            text-align: center;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .challenge-hint:hover {
+            color: var(--tertiary-color);
+        }
+        
+        /* Floating chat button */
+        .chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--tertiary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .chat-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--tertiary-color);
+        }
+        
+        .chat-modal {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: rgba(10, 36, 99, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--tertiary-color);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+        
+        .chat-modal.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+        
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            border-bottom: 1px solid var(--tertiary-color);
+        }
+        
+        .chat-title {
+            color: var(--text-light);
+            font-weight: bold;
+        }
+        
+        .chat-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .chat-close:hover {
+            color: var(--tertiary-color);
+        }
+        
+        .chat-body {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .chat-message {
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .chat-bot-message {
+            background-color: rgba(30, 86, 160, 0.6);
+            border-top-left-radius: 0;
+            align-self: flex-start;
+        }
+        
+        .chat-user-message {
+            background-color: rgba(77, 150, 255, 0.6);
+            border-top-right-radius: 0;
+            align-self: flex-end;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid var(--tertiary-color);
+        }
+        
+        .chat-input input {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--tertiary-color);
+            border-radius: 5px;
+            padding: 0.8rem;
+            color: var(--text-light);
+            margin-right: 0.5rem;
+        }
+        
+        .chat-input button {
+            background-color: var(--tertiary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chat-input button:hover {
+            background-color: transparent;
+            box-shadow: 0 0 10px var(--tertiary-color);
+            border: 1px solid var(--tertiary-color);
+        }
+        
+        /* Stats section */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            background-color: rgba(30, 86, 160, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(77, 150, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--tertiary-color);
+            box-shadow: 0 0 15px var(--tertiary-color);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--tertiary-color);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px var(--tertiary-color);
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        
+        /* Add these new styles */
+        a, button, input[type="submit"], .clickable {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%234d96ff" d="M13 3v6h5.59l-9.83 9.83 1.41 1.41L20 10.41V16h2V3z"/></svg>') 12 12, pointer;
+        }
+        
+        /* Hacking terminal effect */
+        .terminal-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.1),
+                rgba(0, 255, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            animation: scan 5s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        /* Hacking code effect */
+        .code-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.05),
+                rgba(0, 255, 0, 0.05) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            animation: code 10s linear infinite;
+        }
+        
+        @keyframes code {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        
+        /* Interactive elements */
+        .interactive-element {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interactive-element::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at var(--mouse-x) var(--mouse-y),
+                rgba(77, 150, 255, 0.2),
+                transparent 200px
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Add these to existing elements */
+        .feature-card::before, .challenge-container::before, .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at var(--mouse-x) var(--mouse-y),
+                rgba(77, 150, 255, 0.1),
+                transparent 200px
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        body.light-mode .team-member {
+            background-color: rgba(255, 0, 0, 0.2); /* Light red background */
+            border: 1px solid rgba(255, 0, 0, 0.2); /* Red border */
+        }
+        
+        body.light-mode .team-member:hover {
+            box-shadow: 0 0 15px #ff0000; /* Red glow */
+        }
+        
+        body.light-mode .member-image {
+            background-color: #ff0000; /* Red background */
+        }
+        
+        body.light-mode .member-info h3 {
+            color: #ff0000; /* Red headings */
+        }
+        
+        body.light-mode .member-role {
+            color: #ff0000; /* Red role text */
+        }
+        
+        body.light-mode .social-link {
+            background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+            color: #ff0000; /* Red icons */
+            border: 1px solid rgba(255, 0, 0, 0.3); /* Red border */
+        }
+        
+        body.light-mode .social-link:hover {
+            background-color: #ff0000; /* Red background on hover */
+            color: #000000; /* Black icon on hover */
+            box-shadow: 0 0 10px #ff0000; /* Red glow */
+        }
+        
+        body.light-mode #chatModal {
+            background-color: #000000; /* Black background */
+            border: 1px solid #ff0000; /* Red border */
+        }
+        
+        body.light-mode #chatModal .chat-header {
+            background-color: #ff0000; /* Red header */
+            color: #000000; /* Black text */
+        }
+        
+        body.light-mode #chatModal .chat-message {
+            color: #ff0000; /* Red text */
+        }
+        
+        body.light-mode #chatModal .chat-user-message {
+            background-color: rgba(255, 0, 0, 0.2); /* Light red background */
+        }
+        
+        body.light-mode #chatModal .chat-bot-message {
+            background-color: rgba(255, 0, 0, 0.1); /* Lighter red background */
+        }
+        
+        body.light-mode #chatModal input[type="text"] {
+            background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+            border: 1px solid #ff0000; /* Red border */
+            color: #ff0000; /* Red text */
+        }
+        
+        body.light-mode #chatModal button {
+            background-color: #ff0000; /* Red button */
+            color: #000000; /* Black text */
+        }
+        
+        body.light-mode #chatModal button:hover {
+            background-color: transparent; /* Transparent on hover */
+            box-shadow: 0 0 10px #ff0000; /* Red glow */
+            border: 1px solid #ff0000; /* Red border */
+        }
+        
+        body.light-mode footer {
+            background-color: #000000; /* Black footer */
+            border-top: 1px solid #ff0000; /* Red border */
+        }
+        
+        body.light-mode footer p {
+            color: #ff0000; /* Red text */
+        }
+        
+        body.light-mode .stat-item {
+            background-color: rgba(255, 0, 0, 0.2); /* Light red background */
+            border: 1px solid rgba(255, 0, 0, 0.3); /* Red border */
+        }
+        
+        body.light-mode .stat-number {
+            color: #ff0000; /* Red numbers */
+            text-shadow: 0 0 10px #ff0000; /* Red glow */
+        }
+        
+        body.light-mode .stat-label {
+            color: #ff0000; /* Red labels */
+        }
+        
+        body.light-mode .btn {
+            background-color: #ff0000;
+            color: #000000;
+        }
+        
+        body.light-mode .btn:hover {
+            background-color: transparent;
+            box-shadow: 0 0 10px #ff0000;
+            border: 1px solid #ff0000;
+        }
+        
+        body.light-mode .resource-card {
+            background-color: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+        
+        body.light-mode .resource-card:hover {
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+        
+        body.light-mode .resource-icon {
+            color: #ff0000;
+        }
+        
+        body.light-mode .resource-card h3 {
+            color: #ff0000;
+        }
+        
+        body.light-mode .resource-link {
+            color: #ff0000;
+        }
+        
+        body.light-mode .resource-link:hover {
+            color: #ff0000;
+            text-decoration: underline;
+        }
+        
+        body.light-mode .visualization-container {
+            border: 1px solid #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+        }
+        
+        body.light-mode .visualization-info {
+            background-color: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+        
+        body.light-mode .section-description {
+            color: #ff0000;
+        }
+        
+        /* Add any other light-mode specific styles here */
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="matrix-rain" id="matrixRain"></div>
+    
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-sun"></i></button>
+    
+    <header>
+        <div class="logo-container">
+            <div class="logo" aria-label="Cyber Security Club Logo">CS</div>
+            <h1>Cyber Security Club</h1>
+        </div>
+    </header>
+    
+    <nav aria-label="Main Navigation">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#tor-visualization">Tor Visualization</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="home" class="hero">
+        <div>
+            <h1>Welcome to the Future of Cyber Security</h1>
+            <p>Explore, Learn, and Innovate with Us.</p>
+            
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            <p>Until our next cybersecurity workshop!</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section id="about">
+            <h2 class="section-title">About Us</h2>
+            <p>The Cyber Security Club is dedicated to creating a community of security enthusiasts and professionals who are passionate about learning and sharing knowledge in the field of cybersecurity. We provide hands-on experience, workshops, CTF competitions, and networking opportunities to help members develop their skills and advance their careers.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Hands-on Learning</h3>
+                    <p>Gain practical experience through workshops, labs, and real-world security scenarios designed to enhance your technical skills.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>CTF Competitions</h3>
+                    <p>Participate in Capture The Flag competitions to test your skills, learn new techniques, and collaborate with fellow security enthusiasts.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Networking</h3>
+                    <p>Connect with like-minded individuals, industry professionals, and potential employers through our events and community forums.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="events">
+            <h2 class="section-title">Upcoming Events</h2>
+            
+            <div class="events">
+                <div class="event-card">
+                    <div class="event-image">Web Security Workshop</div>
+                    <div class="event-details">
+                        <p class="event-date">March 15, 2025 | 2:00 PM</p>
+                        <h3>Web Application Security Fundamentals</h3>
+                        <p>Learn about common web vulnerabilities like XSS, CSRF, and SQL Injection, and how to protect against them.</p>
+                        <a href="#" class="btn">Register</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image">Crypto Challenge</div>
+                    <div class="event-details">
+                        <p class="event-date">April 2, 2025 | 6:00 PM</p>
+                        <h3>Cryptography Mini CTF</h3>
+                        <p>Test your skills in a cryptography-focused Capture The Flag competition with prizes for the top performers.</p>
+                        <a href="#" class="btn">Register</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image">Network Defense</div>
+                    <div class="event-details">
+                        <p class="event-date">April 18, 2025 | 1:00 PM</p>
+                        <h3>Network Security Workshop</h3>
+                        <p>Explore network security concepts, tools, and techniques for securing enterprise networks.</p>
+                        <a href="#" class="btn">Register</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="resources">
+            <h2 class="section-title">Resources</h2>
+            <p>Our club provides a variety of resources to help you on your cybersecurity journey:</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Learning Materials</h3>
+                    <p>Access curated tutorials, articles, and courses covering various aspects of cybersecurity.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Virtual Lab</h3>
+                    <p>Practice your skills in our secure virtual lab environment with various vulnerable systems.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>Mentorship</h3>
+                    <p>Get guidance from experienced security professionals to help advance your skills and career.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="tor-visualization">
+            <h2 class="section-title">Tor Network Visualization</h2>
+            <p class="section-description">Explore the global Tor network traffic in real-time. This visualization demonstrates how anonymized internet traffic flows through the Tor network across the world.</p>
+            
+            <div class="visualization-container">
+                <iframe 
+                    src="https://torflow.uncharted.software/#?ML=-22.32421875,40.78054143186033,3" 
+                    width="100%" 
+                    height="600px" 
+                    frameborder="0" 
+                    allowfullscreen
+                    title="TorFlow Network Visualization"
+                    class="tor-iframe">
+                </iframe>
+            </div>
+            
+            <div class="visualization-info">
+                <p>The Tor network is a crucial tool for privacy and anonymity online. This visualization by <a href="https://uncharted.software" target="_blank" rel="noopener noreferrer">Uncharted Software</a> shows how data travels through the network, helping to understand the principles of onion routing and network security.</p>
+                <a href="https://torflow.uncharted.software/" target="_blank" rel="noopener noreferrer" class="btn">Open in Full Screen</a>
+            </div>
+        </section>
+        
+        <section id="blog">
+            <h2 class="section-title">Latest News & Articles</h2>
+            
+            <div class="blog-posts">
+                <article class="blog-card">
+                    <div class="blog-image">Ransomware Defense</div>
+                    <div class="blog-content">
+                        <p class="blog-date">February 28, 2025</p>
+                        <h3>Protecting Against Modern Ransomware Attacks</h3>
+                        <p>Learn about the latest ransomware trends and effective strategies to protect your organization from these devastating attacks.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-image">Zero Trust</div>
+                    <div class="blog-content">
+                        <p class="blog-date">February 15, 2025</p>
+                        <h3>Implementing Zero Trust Architecture</h3>
+                        <p>Discover how to implement a Zero Trust security model in your organization and why traditional perimeter security is no longer sufficient.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-image">Cloud Security</div>
+                    <div class="blog-content">
+                        <p class="blog-date">January 30, 2025</p>
+                        <h3>Cloud Security Best Practices</h3>
+                        <p>Explore essential security practices for protecting your data and applications in cloud environments like AWS, Azure, and GCP.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <section id="team">
+            <h2 class="section-title">Our Team</h2>
+            
+            <div class="team">
+                <div class="team-member">
+                    <div class="member-image">👨‍💻</div>
+                    <div class="member-info">
+                        <h3>Alex Johnson</h3>
+                        <p class="member-role">Club President</p>
+                        <p>Penetration tester with 5+ years of experience in web and network security.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">👩‍💻</div>
+                    <div class="member-info">
+                        <h3>Sarah Chen</h3>
+                        <p class="member-role">Vice President</p>
+                        <p>Security researcher specializing in malware analysis and reverse engineering.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">👨‍💻</div>
+                    <div class="member-info">
+                        <h3>Michael Lee</h3>
+                        <p class="member-role">Event Coordinator</p>
+                        <p>Cybersecurity consultant focusing on compliance and security architecture.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="stats">
+            <h2 class="section-title">Club Statistics</h2>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-label">Club Members</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number" data-count="120">0</div>
+                    <div class="stat-label">Workshops Held</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number" data-count="45">0</div>
+                    <div class="stat-label">CTF Events</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number" data-count="85">0</div>
+                    <div class="stat-label">Industry Partners</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2 class="section-title">Skills You'll Develop</h2>
+            
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-name">Network Security</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="85"></div>
+                    </div>
+                    <div class="skill-percentage">85%</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-name">Ethical Hacking</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="90"></div>
+                    </div>
+                    <div class="skill-percentage">90%</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-name">Cryptography</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="75"></div>
+                    </div>
+                    <div class="skill-percentage">75%</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-name">Malware Analysis</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="80"></div>
+                    </div>
+                    <div class="skill-percentage">80%</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-name">Digital Forensics</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="70"></div>
+                    </div>
+                    <div class="skill-percentage">70%</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-name">Cloud Security</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="65"></div>
+                    </div>
+                    <div class="skill-percentage">65%</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="challenge">
+            <h2 class="section-title">Try a Mini CTF Challenge</h2>
+            
+            <div class="challenge-container">
+                <div class="challenge-title">Base64 Decoder Challenge</div>
+                <div class="challenge-description">Decode this Base64 string to find the secret message: <br><strong>Q3liZXJTZWN1cml0eUlzRnVuIQ==</strong></div>
+                
+                <div class="challenge-input">
+                    <input type="text" id="challengeInput" placeholder="Enter your answer...">
+                    <button id="checkAnswerBtn">Submit</button>
+                </div>
+                
+                <div class="challenge-hint" id="showHint">Show hint</div>
+                <div id="challengeResult"></div>
+            </div>
+        </section>
+    </div>
+    
+    <section id="contact" class="cta">
+        <h2>Join Our Community</h2>
+        <p>Become a member of our club and start your cybersecurity journey today!</p>
+        
+        <form action="#" method="POST" aria-label="Membership Application Form">
+            <input type="text" placeholder="Full Name" required aria-label="Full Name">
+            <input type="email" placeholder="Email Address" required aria-label="Email Address">
+            <textarea placeholder="Why do you want to join our club?" rows="4" required aria-label="Motivation for joining"></textarea>
+            <button type="submit">Submit Application</button>
+        </form>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Cyber Security Club</h3>
+                <p>Building a community of security enthusiasts and professionals since 2020.</p>
+                <div class="social-links" style="margin-top: 1rem;">
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#team">Team</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li>Email: info@cybersecclub.com</li>
+                    <li>Phone: (123) 456-7890</li>
+                    <li>Address: 123 Security St, Cyber City</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Cyber Security Club. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <div class="chat-btn" id="chatBtn">
+        <i class="fas fa-comment"></i>
+    </div>
+    
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-header">
+            <div class="chat-title">Cyber Assistant</div>
+            <button class="chat-close" id="closeChatBtn" aria-label="Close chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message chat-bot-message">
+                Hi there! 👋 I'm CyberBot, the AI assistant for the Cyber Security Club. How can I help you today?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button id="sendChatBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize on document load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Matrix rain animation (existing code)
+            const matrixRain = document.getElementById('matrixRain');
+            const characters = '01';
+            const drops = 100;
+            
+            for (let i = 0; i < drops; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'matrix-drop';
+                drop.style.left = `${Math.random() * 100}%`;
+                drop.style.animationDelay = `${Math.random() * 8}s`;
+                drop.style.opacity = Math.random() * 0.5 + 0.5;
+                
+                const length = Math.floor(Math.random() * 15) + 5;
+                let content = '';
+                
+                for (let j = 0; j < length; j++) {
+                    content += characters.charAt(Math.floor(Math.random() * characters.length));
+                    if (j < length - 1) content += '<br>';
+                }
+                
+                drop.innerHTML = content;
+                matrixRain.appendChild(drop);
+            }
+            
+            // Initialize particles.js
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#4d96ff"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#4d96ff",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 6,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('light-mode');
+                if (document.body.classList.contains('light-mode')) {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            });
+            
+            // Countdown Timer
+            const countdownDate = new Date();
+            countdownDate.setDate(countdownDate.getDate() + 14); // 14 days from now
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // Animate skill bars
+            setTimeout(() => {
+                const skillBars = document.querySelectorAll('.skill-progress');
+                skillBars.forEach(bar => {
+                    const progress = bar.getAttribute('data-progress');
+                    bar.style.width = progress + '%';
+                });
+            }, 500);
+            
+            // Stats counter animation
+            setTimeout(() => {
+                const counters = document.querySelectorAll('.stat-number');
+                const speed = 200;
+                
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-count');
+                    const increment = target / speed;
+                    
+                    let currentCount = 0;
+                    const updateCounter = () => {
+                        currentCount += increment;
+                        if (currentCount < target) {
+                            counter.innerText = Math.floor(currentCount);
+                            setTimeout(updateCounter, 1);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    
+                    updateCounter();
+                });
+            }, 500);
+            
+            // Challenge functionality
+            const challengeInput = document.getElementById('challengeInput');
+            const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+            const showHint = document.getElementById('showHint');
+            const challengeResult = document.getElementById('challengeResult');
+            
+            checkAnswerBtn.addEventListener('click', function() {
+                const answer = challengeInput.value.trim();
+                if (answer.toLowerCase() === 'cybersecurityisfun!') {
+                    challengeResult.innerHTML = '<div style="color: #4dff88; text-align: center; margin-top: 1rem;">Correct! Great job!</div>';
+                    challengeInput.style.borderColor = '#4dff88';
+                } else {
+                    challengeResult.innerHTML = '<div style="color: #ff5e62; text-align: center; margin-top: 1rem;">Try again!</div>';
+                    challengeInput.style.borderColor = '#ff5e62';
+                }
+            });
+            
+            showHint.addEventListener('click', function() {
+                showHint.innerHTML = 'Hint: Base64 is an encoding scheme that converts binary data to ASCII text format.';
+            });
+            
+            // Chat functionality
+            const chatBtn = document.getElementById('chatBtn');
+            const chatModal = document.getElementById('chatModal');
+            const closeChatBtn = document.getElementById('closeChatBtn');
+            const chatInput = document.getElementById('chatInput');
+            const sendChatBtn = document.getElementById('sendChatBtn');
+            const chatBody = document.getElementById('chatBody');
+            
+            chatBtn.addEventListener('click', function() {
+                chatModal.classList.add('active');
+            });
+            
+            closeChatBtn.addEventListener('click', function() {
+                chatModal.classList.remove('active');
+            });
+            
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message !== '') {
+                    // Add user message
+                    chatBody.innerHTML += `<div class="chat-message chat-user-message">${message}</div>`;
+                    chatInput.value = '';
+                    
+                    // Simulate bot response
+                    setTimeout(() => {
+                        let botResponse = "I'm sorry, I can only provide basic information. For more complex questions, please contact a club officer.";
+                        
+                        if (message.toLowerCase().includes('join')) {
+                            botResponse = "To join our club, fill out the application form in the Contact section of our website. We welcome members of all skill levels!";
+                        } else if (message.toLowerCase().includes('event') || message.toLowerCase().includes('workshop')) {
+                            botResponse = "Our next workshop will be in about 14 days. Check the countdown timer on our home page for the exact timing.";
+                        } else if (message.toLowerCase().includes('ctf') || message.toLowerCase().includes('capture the flag')) {
+                            botResponse = "We host CTF competitions monthly. Try the mini challenge on our website to get a taste of what's to come!";
+                        }
+                        
+                        chatBody.innerHTML += `<div class="chat-message chat-bot-message">${botResponse}</div>`;
+                        chatBody.scrollTop = chatBody.scrollHeight;
+                    }, 1000);
+                    
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }
+            }
+            
+            sendChatBtn.addEventListener('click', sendMessage);
+            
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Track mouse position for interactive effects
+            document.addEventListener('mousemove', function(e) {
+                document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+                document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
+            });
+
+            // Add terminal and code effects
+            const terminalEffect = document.createElement('div');
+            terminalEffect.className = 'terminal-effect';
+            document.body.appendChild(terminalEffect);
+
+            const codeEffect = document.createElement('div');
+            codeEffect.className = 'code-effect';
+            document.body.appendChild(codeEffect);
+
+            // Add interactive glow to elements
+            const interactiveElements = document.querySelectorAll('.interactive-element, .feature-card, .challenge-container, .team-member');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    this.style.setProperty('--mouse-x', x + 'px');
+                    this.style.setProperty('--mouse-y', y + 'px');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
